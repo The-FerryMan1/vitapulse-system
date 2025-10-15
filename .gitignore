@@ -1,0 +1,16 @@
+# Dependencies
+/node_modules
+/vitapulse-app/node_modules
+/vitapulse-api/node_modules
+
+# Build output
+/dist        # The combined frontend build folder
+/build       # If you have a backend build folder
+
+# IDE and OS files
+.DS_Store
+.vscode/
+
+# Environment files (containing secrets)
+.env
+.env.local

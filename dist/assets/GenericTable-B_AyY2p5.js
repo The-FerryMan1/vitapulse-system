@@ -1,0 +1,1 @@
+import{_ as o}from"./GenericTable.vue_vue_type_script_setup_true_lang-DlfHBqvq.js";import"./Pagination.vue_vue_type_script_setup_true_lang-CvqWSGbF.js";import"./index-DWTketqF.js";import"./Table.vue_vue_type_script_setup_true_lang-BtKBs-xT.js";import"./Input.vue_vue_type_script_setup_true_lang-BzFFVISg.js";export{o as default};

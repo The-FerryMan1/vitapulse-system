@@ -1,0 +1,8 @@
+// tsconfig.json (in the project root: /my-merged-app/)
+{
+  "files": [],
+  "references": [
+    { "path": "./vitapulse-app/tsconfig.json" },
+    { "path": "./vitapulse-api/tsconfig.json" }
+  ]
+}

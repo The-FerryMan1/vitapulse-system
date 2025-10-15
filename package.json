@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "dev:frontend": "cd vitapulse-app && bun run dev",
+        "dev:backend":"cd vitapulse-api && bun --watch run src/index.ts",
+        "dev":"bun run dev:frontend & bun dev:backend",
+
+        "build:frontend": "cd vitapulse-app && bun run build",
+        "start": "bun build:frontend && cd vitapulse-api && bun run src/index.ts"
+    }
+}
