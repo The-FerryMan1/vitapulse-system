@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+
+.git
+.gitignore
+.dockerignore
+
+.env
+.env.local
+tmp/
+logs/
+
+/dist
+/build
