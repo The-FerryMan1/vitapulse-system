@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed, ref, h, toRaw } from 'vue';
+import { computed, ref, h, toRaw, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { useTemplateRef } from 'vue';
 import Indicator from './Indicator.vue';
 import type {TableDate} from '@/types/types';
 import {useAxios} from '@/axios/useAxios.ts';
-const UBadge = resolveComponent('UBadge')
-const UCheckbox = resolveComponent('UCheckbox')
+
+const UBadge = resolveComponent('UBadge');
+const UCheckbox = resolveComponent('UCheckbox');
 const props = defineProps<{
     Data: TableDate[]
 }>();
@@ -91,26 +92,25 @@ const columns = computed(()=>{
 
 
 
+
 const deleteSelectedRow = async()=>{
 
-    let data = [];
+    let data = [] as {id: number}[];
 
     table?.value?.tableApi?.getFilteredSelectedRowModel().rows.forEach(element => {
        data.push({id:toRaw(element.original.id)})
     });
-    console.log(data)
 
     try {
         await  useAxios.post('/auth/bp/delete', data)
     } catch (error) {
-        
+        console.error(error)
     }
 
 }
 
-
 const tableData = computed(()=>{
-    return props?.Data;
+    return props?.Data
 })
 
 
@@ -127,7 +127,7 @@ const tableData = computed(()=>{
     
 
        
-        <form @submit="deleteSelectedRow" class="flex justify-end items-center" v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length > 0">
+        <form @submit.prevent="deleteSelectedRow" class="flex justify-end items-center" v-if="table?.tableApi?.getFilteredSelectedRowModel().rows?.length > 0">
             
             <button class="p-2 bg-red-500 text-sm my-1 rounded-md">
                 Delete selected row

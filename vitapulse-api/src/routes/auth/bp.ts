@@ -281,7 +281,8 @@ app.post('/delete', async(c)=>{
         })
         return c.json({message: payload}, 200)
     } catch (error) {
-        
+        console.error(error)
+        return c.json({message: "unexpected error occured", error});
     }
 
 
