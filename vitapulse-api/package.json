@@ -1,0 +1,21 @@
+{
+  "name": "VitaPulseAPI",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "build": "bun build src/index.ts --compile --outfile hono-app"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.2",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.7.5",
+    "nodemailer": "^6.10.1",
+    "postgres": "^3.4.7",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.8",
+    "@types/nodemailer": "^6.4.17",
+    "drizzle-kit": "^0.30.6"
+  }
+}
