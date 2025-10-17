@@ -1,62 +1,41 @@
-# --------------------------------------------------------------------------
-# STAGE 1: Frontend Build (Builds assets using Bun/Vite)
-# --------------------------------------------------------------------------
+
 FROM oven/bun:latest AS vitapulse_app_builder
 
-# Set the working directory for the frontend app
+
 WORKDIR /app/vitapulse-app
 
-# Copy the frontend package files and install dependencies
+
 COPY vitapulse-app/package*.json ./
 RUN bun install --frozen-lockfile
 
-# Copy the rest of the frontend source code
 COPY vitapulse-app/ .
 RUN bun run build
-# The compiled frontend assets are now in /app/vitapulse-app/dist
 
-# --------------------------------------------------------------------------
-# STAGE 2: Backend & Runtime (Serves the app using Bun/Hono)
-# --------------------------------------------------------------------------
 FROM oven/bun:latest AS runtime
 
-# Set the working directory for the server application
 WORKDIR /app
 
-# 1. Copy the Hono/Bun server files and package files (in its subfolder)
-# We copy all the files needed for the API build/run phase
+
 COPY vitapulse-api/package*.json ./vitapulse-api/
 COPY vitapulse-api/tsconfig.json ./vitapulse-api/
 COPY vitapulse-api/src ./vitapulse-api/src/
 
-# Copy the root package.json (needed if 'start' is defined here)
+
 COPY package.json .
 
-# Install backend dependencies and BUILD THE BACKEND
+
 WORKDIR /app/vitapulse-api
 RUN bun install --frozen-lockfile
 
-# *** FIX: INSERT THE BACKEND BUILD STEP HERE ***
-# This runs the "bun build src/index.ts --compile --outfile hono-app" command
-# The 'hono-app' executable is created in /app/vitapulse-api/
-RUN bun run build
-# -------------------------------------------------
 
-# 2. Setup the final runtime environment
+RUN bun run build
+
 WORKDIR /app
 
-# Copy the compiled frontend assets from the builder stage
-# These go into the shared /app/dist directory
+
 COPY --from=vitapulse_app_builder /app/dist /app/dist
 
-# *** FIX: COPY THE COMPILED BACKEND EXECUTABLE TO /app ***
-# We copy the executable from /app/vitapulse-api/hono-app to /app/hono-app
-COPY vitapulse-api/hono-app /app/hono-app 
-# -------------------------------------------------------
-
-# Expose the port the Hono server will listen on
 EXPOSE 3000
 
-# *** FIX: RUN THE COMPILED EXECUTABLE DIRECTLY ***
-# This is faster and requires fewer dependencies than running a TypeScript file
-CMD ["/app/hono-app"]
+
+CMD ["/app/vitapulse-api/hono-app"]

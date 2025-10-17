@@ -40,7 +40,7 @@ const apiApp = new Hono();
 apiApp.use(logger());
 apiApp.use(
   cors({
-    origin: [Bun.env.APP_DOMAIN_NAME!],
+    origin: [Bun.env.APP_DOMAIN_NAME!, 'http://locahost:8000'],
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
@@ -78,6 +78,7 @@ const { websocket } = createBunWebSocket<ServerWebSocket>();
 
 
 const STATIC_ROOT = path.join(import.meta.dir, '..', '..', 'dist'); 
+const STATIC_ROOT_DOCKER = '/app/dist'
 console.log(`[Hono] Serving static files from: ${STATIC_ROOT}`); 
 
 
@@ -88,8 +89,8 @@ serverApp.route("/api", apiApp);
 
 serverApp.get('/', 
   serveStatic({
-    root: '../',
-    path: 'dist/index.html',
+    root: Bun.env.PRODUCTION! === 'dev'? STATIC_ROOT:STATIC_ROOT_DOCKER,
+    path: 'index.html',
   })
 );
 
@@ -98,7 +99,7 @@ serverApp.get('/',
 serverApp.use(
   '/*', 
   serveStatic({
-    root: '../dist', 
+   root: Bun.env.PRODUCTION! === 'dev'? STATIC_ROOT:STATIC_ROOT_DOCKER,
   })
 );
 
@@ -106,8 +107,8 @@ serverApp.use(
 //for spa router
 serverApp.get('*', 
   serveStatic({
-    root: '../',
-    path: 'dist/index.html', 
+    root: Bun.env.PRODUCTION! === 'dev'? STATIC_ROOT:STATIC_ROOT_DOCKER,
+    path: 'index.html', 
   })
 );
 
