@@ -73,11 +73,9 @@ app.post('/delete', async(c)=>{
     const payload = await c.req.json() as {id: number}[];
         if(!payload) return c.json({message: 'No payload provided'}, 404)
         try {
-    
-    
             payload.forEach(async(ele)=>{
                 console.log(ele, "123123")
-                await db.delete(alertHistory).where(and(eq(alertHistory.id, ele.id), eq(alertHistory.user_id, Number(userID))));
+               const res = await db.delete(alertHistory).where(and(eq(alertHistory.id, ele.id), eq(alertHistory.user_id, Number(userID))));
             })
             return c.json({message: payload}, 200)
         } catch (error) {

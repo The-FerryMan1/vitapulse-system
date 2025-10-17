@@ -5,7 +5,11 @@ import { getPaginationRowModel } from '@tanstack/vue-table'
 import { useTemplateRef } from 'vue';
 import type { alerts } from '@/types/types';
 import { useAxios } from '@/axios/useAxios';
+import { useRouter } from 'vue-router';
 
+
+
+const router = useRouter()
 const UCheckbox = resolveComponent('UCheckbox');
 
 
@@ -59,16 +63,21 @@ const columns = computed(() => {
     return columns
 });
 
+
+const alert_Datas = ref<alerts[]>(props.Data)
 const deleteSelectedRow = async()=>{
 
     let data = [] as {id: number}[];
 
     table?.value?.tableApi?.getFilteredSelectedRowModel().rows.forEach(element => {
        data.push({id:toRaw(element.original.id)})
+       
     });
 
     try {
         await  useAxios.post('/auth/alerts/delete', data)
+
+        router.back();
     } catch (error) {
         console.error(error)
     }
@@ -77,7 +86,7 @@ const deleteSelectedRow = async()=>{
 
 
 const tableData = computed(() => {
-    return props?.Data;
+    return alert_Datas.value
 })
 </script>
 

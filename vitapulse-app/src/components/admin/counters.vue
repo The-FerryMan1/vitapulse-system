@@ -29,8 +29,9 @@ const count: any = inject('data')
                 <UIcon name="i-lucide-triangle-alert" class="size-8 text-red-500" />
                 <h2 class="text-lg font-semibold">Total alert sent</h2>
             </div>
-            <h1 v-if="count.alertCount" class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ count.alertCount
+            <h1 v-if="count.alertCount > 0" class="text-4xl font-bold text-gray-900 dark:text-gray-100">{{ count.alertCount
                 }}</h1>
+            <h1 v-else-if="count.alertCount < 1">No data found</h1>
             <h1 v-else class="text-4xl animate-pulse text-gray-500 dark:text-gray-400">....Loading</h1>
         </div>
 
