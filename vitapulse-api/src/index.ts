@@ -88,8 +88,8 @@ serverApp.route("/api", apiApp);
 
 serverApp.get('/', 
   serveStatic({
-    root: STATIC_ROOT,
-    path: 'index.html',
+    root: '../',
+    path: 'dist/index.html',
   })
 );
 
@@ -98,7 +98,7 @@ serverApp.get('/',
 serverApp.use(
   '/*', 
   serveStatic({
-    root: STATIC_ROOT, 
+    root: '../dist', 
   })
 );
 
@@ -106,8 +106,8 @@ serverApp.use(
 //for spa router
 serverApp.get('*', 
   serveStatic({
-    root: STATIC_ROOT,
-    path: 'index.html', 
+    root: '../',
+    path: 'dist/index.html', 
   })
 );
 
