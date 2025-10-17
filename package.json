@@ -6,7 +6,8 @@
 
         "build:frontend": "cd vitapulse-app && bun run build",
         "build:backend": "cd vitapulse-api && bun run build",
+
         "build": "bun run build:frontend && bun run build:vitapulse-api",
-        "start": "bun build:frontend && cd vitapulse-api && bun run src/index.ts"
+        "start": "bun build:frontend && cd vitapulse-api && bun run build && ./hono-app"
     }
 }
