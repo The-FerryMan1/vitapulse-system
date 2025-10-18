@@ -30,7 +30,7 @@ RUN bun install --frozen-lockfile
 
 RUN bun run build
 
-WORKDIR /app
+WORKDIR /app/vitapulse-api
 
 
 COPY --from=vitapulse_app_builder /app/vitapulse-api/dist /app/vitapulse-api/dist
@@ -38,4 +38,4 @@ COPY --from=vitapulse_app_builder /app/vitapulse-api/dist /app/vitapulse-api/dis
 EXPOSE 3000
 
 
-CMD ["/app/vitapulse-api/hono-app"]
+CMD ["./hono-app"]

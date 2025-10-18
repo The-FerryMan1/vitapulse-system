@@ -77,9 +77,9 @@ const { websocket } = createBunWebSocket<ServerWebSocket>();
 
 
 
-const explicit_root = './dist';
-const STATIC_ROOT_DOCKER = './vitapulse-api/dist/dist'
 
+// const explicit_root = path.join(import.meta.dir,  'dist');
+const explicit_root = './dist'
 console.log(`[Hono] Serving static files from: ${explicit_root}`); 
 
 
