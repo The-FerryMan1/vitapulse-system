@@ -27,7 +27,7 @@ export default ({ mode }) => {
       },
     },
     build: {
-      outDir: resolve(__dirname, '..', 'dist'),
+      outDir: resolve(__dirname, '..','./vitapulse-api', 'dist'),
       emptyOutDir: true
     },
     base: '/',

@@ -77,9 +77,10 @@ const { websocket } = createBunWebSocket<ServerWebSocket>();
 
 
 
-const STATIC_ROOT = path.join(import.meta.dir, '..', '..', 'dist'); 
+const STATIC_ROOT = path.join(import.meta.dir, 'dist'); 
 const STATIC_ROOT_DOCKER = '/app/dist'
-console.log(`[Hono] Serving static files from: ${Bun.env.PRODUCTION! === 'dev'? '../dist':STATIC_ROOT_DOCKER}`); 
+const explicit_root = './dist';
+console.log(`[Hono] Serving static files from: ${explicit_root}`); 
 
 
 
@@ -89,7 +90,7 @@ serverApp.route("/api", apiApp);
 
 serverApp.get('/', 
   serveStatic({
-    root: Bun.env.PRODUCTION! === 'dev'? '../dist':STATIC_ROOT_DOCKER,
+    root: explicit_root,
     path: 'index.html',
   })
 );
@@ -99,7 +100,7 @@ serverApp.get('/',
 serverApp.use(
   '/*', 
   serveStatic({
-   root: Bun.env.PRODUCTION! === 'dev'? '../dist':STATIC_ROOT_DOCKER,
+   root: explicit_root,
   })
 );
 
@@ -107,7 +108,7 @@ serverApp.use(
 //for spa router
 serverApp.get('*', 
   serveStatic({
-    root: Bun.env.PRODUCTION! === 'dev'? '../dist':STATIC_ROOT_DOCKER,
+    root: explicit_root,
     path: 'index.html', 
   })
 );
