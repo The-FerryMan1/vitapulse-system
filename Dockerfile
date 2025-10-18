@@ -33,7 +33,7 @@ RUN bun run build
 WORKDIR /app
 
 
-COPY --from=vitapulse_app_builder /app/dist /app/dist
+COPY --from=vitapulse_app_builder /app/vitapulse-api/dist /app/vitapulse-api/dist
 
 EXPOSE 3000
 

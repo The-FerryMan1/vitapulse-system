@@ -1,5 +1,5 @@
 export const setUpWebSocketConnection = (url: string) => {
-  const app_name:string = import.meta.env.VITE_PRODUCTION ==='dev'? import.meta.env.VITE_DOMAIN_NAME:import.meta.env.VITE_DOCKER_DOMAIN;
+  const app_name:string = import.meta.env.VITE_DOMAIN_NAME;
 
 
   let domain = ""

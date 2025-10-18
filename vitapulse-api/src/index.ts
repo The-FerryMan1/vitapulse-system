@@ -40,7 +40,7 @@ const apiApp = new Hono();
 apiApp.use(logger());
 apiApp.use(
   cors({
-    origin: [Bun.env.APP_DOMAIN_NAME!, 'http://locahost:8000'],
+    origin: [Bun.env.APP_DOMAIN_NAME!, 'http://localhost:8000'],
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
@@ -77,9 +77,9 @@ const { websocket } = createBunWebSocket<ServerWebSocket>();
 
 
 
-const STATIC_ROOT = path.join(import.meta.dir, 'dist'); 
-const STATIC_ROOT_DOCKER = '/app/dist'
 const explicit_root = './dist';
+const STATIC_ROOT_DOCKER = './vitapulse-api/dist/dist'
+
 console.log(`[Hono] Serving static files from: ${explicit_root}`); 
 
 
@@ -114,7 +114,7 @@ serverApp.get('*',
 );
 
 export default {
-  port: 3000,
+  port: 8000,
   fetch: serverApp.fetch, 
   websocket,
 };
