@@ -5,7 +5,6 @@
 .gitignore
 .dockerignore
 
-.env
 .env.local
 tmp/
 logs/
