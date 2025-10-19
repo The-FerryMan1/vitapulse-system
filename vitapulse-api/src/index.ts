@@ -1,10 +1,14 @@
 import { Hono } from "hono";
 import { createBunWebSocket } from "hono/bun";
 import type { ServerWebSocket } from "bun";
-
+import path from 'path';
+import dotenv from 'dotenv';
 // Static File Imports
 import { serveStatic } from 'hono/bun';
-import path from 'path';
+
+dotenv.config({
+  path: path.resolve(__dirname, '..', '.env')
+})
 
 // Middleware Imports
 import { logger } from "hono/logger";
@@ -40,7 +44,7 @@ const apiApp = new Hono();
 apiApp.use(logger());
 apiApp.use(
   cors({
-    origin: [Bun.env.APP_DOMAIN_NAME!, 'http://localhost:8000'],
+    origin: [process.env.APP_DOMAIN_NAME!, 'http://localhost:8000'],
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,

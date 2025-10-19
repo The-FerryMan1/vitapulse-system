@@ -4,9 +4,17 @@ import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
 import ui from "@nuxt/ui/vite";
+import dotenv from 'dotenv';
+import path from "node:path";
+
 import { resolve } from "node:path";
 
 export default ({ mode }) => {
+
+ dotenv.config({
+    path: path.resolve(__dirname, '..', '.env')
+  });
+
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({

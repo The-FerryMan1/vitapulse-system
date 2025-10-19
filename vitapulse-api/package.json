@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.15.2",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.2",
     "hono": "^4.7.5",
     "nodemailer": "^6.10.1",
